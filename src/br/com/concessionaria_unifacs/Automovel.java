@@ -15,6 +15,7 @@ public class Automovel {
 	private static Collection<Automovel> automoveis = new ArrayList<>();
 	
 	public Automovel(String marca, String modelo, int ano, String cor, String motor, String placa, String preco) {
+		System.out.println("Criando");
 		this.marca = marca;
 		this.modelo = modelo;
 		this.ano = ano;
@@ -52,21 +53,33 @@ public class Automovel {
 		System.out.println("\nParabéns! O cadastro foi realizado com sucesso.\n");
 	}
 	
+	public static void add(Automovel automovel) {
+		automoveis.add(automovel);
+	}
+	
 	public static void listar() {
 		for (Automovel automovel : automoveis) {
 			System.out.println(automovel.toString());
 		}
 	}
+	
 	public static void editar(String placa) {
-		Scanner leitor = new Scanner(System.in);
-		System.out.println("Digite a placa do autómovel:");
-		String p = leitor.next();
-		
 		for (Automovel automovel : automoveis) {	
-			if (automovel.placa == p) {
+			if (automovel.placa.equals(placa)) {
 				System.out.println("Automovel encontrado");
-			} else 
-		}
-		
+			} else {
+				System.out.println("Nao achei");
+			}
+		}	
+	}
+	
+	public static void excluir(String placa) {
+		for (Automovel automovel : automoveis) {	
+			if (automovel.placa.equals(placa)) {
+				System.out.println("Apaguei");
+			} else {
+				System.out.println("Nao apaguei");
+			}
+		}	
 	}
 }
