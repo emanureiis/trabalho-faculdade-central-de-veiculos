@@ -3,13 +3,13 @@ package br.com.concessionaria_unifacs.modelos;
 public class Automovel {
 	private String marca;
 	private String modelo;
-	private int ano;
+	private String ano;
 	private String cor;
 	private String motorizacao;
 	private String placa;
 	private String preco;
 	
-	public Automovel(String marca, String modelo, int ano, String cor, String motorizacao, String placa, String preco) {
+	public Automovel(String marca, String modelo, String ano, String cor, String motorizacao, String placa, String preco) {
 		System.out.println("Criando");
 		this.marca = marca;
 		this.modelo = modelo;
@@ -36,11 +36,11 @@ public class Automovel {
 		this.modelo = modelo;
 	}
 
-	public int getAno() {
+	public String getAno() {
 		return ano;
 	}
 
-	public void setAno(int ano) {
+	public void setAno(String ano) {
 		this.ano = ano;
 	}
 
@@ -52,11 +52,11 @@ public class Automovel {
 		this.cor = cor;
 	}
 
-	public String getMotor() {
+	public String getMotorizacao() {
 		return motorizacao;
 	}
 
-	public void setMotor(String motorizacao) {
+	public void setMotorizacao(String motorizacao) {
 		this.motorizacao = motorizacao;
 	}
 

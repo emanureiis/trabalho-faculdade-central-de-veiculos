@@ -12,7 +12,9 @@ public class Principal {
 	}
 
 	public static void menu() {
-		do {	
+		Scanner leitor = new Scanner(System.in);
+		Boolean validador = true;
+		while (validador == true)  {	
 			System.out.println("\n+----------------------+");
 			System.out.println("|    MENU DE OPÇÕES    |");
 			System.out.println("+----------------------+");
@@ -23,37 +25,40 @@ public class Principal {
 			System.out.println("| 5. Sair              |");
 			System.out.println("+----------------------+");
 			System.out.println("Digite uma opção:");
-			verrificaResposta();
-		} while (verrificaResposta());
-	}
-	
-	private static boolean verrificaResposta() {
-		Scanner leitor = new Scanner(System.in);
-		
-		String resposta = leitor.next(); 
-		switch (resposta) {
-			case "1": {
-				Database.cadastrar();
-			}
-			case "2": {
-				Database.listar();
-			}
-			case "3": {
-				Database.editar();
-			}
-			case "4": {
-				Database.excluir();
-			}
-			case "5": {
-				break;
-			}
-			default : {
-				System.out.println("Resposta incorreta!");
-				menu();
+			String resposta = leitor.next(); 
+			switch (resposta) {
+				case "1": {
+					Database.cadastrar();
+					validador = true;
+					break;
+				}
+				case "2": {
+					Database.listar();
+					validador = true;
+					break;
+				}
+				case "3": {
+					Database.editar();
+					validador = true;
+					break;
+				}
+				case "4": {
+					Database.excluir();
+					validador = true;
+					break;
+				}
+				case "5": {
+					System.out.println("Saiu");
+					validador = false;
+					break;
+				}
+				default : {
+					System.out.println("Erro");
+					validador = true;
+					break;
+				}
 			}
 		}
-		System.out.println("Finish");
-		return false;
 	}
-
 }
+	
