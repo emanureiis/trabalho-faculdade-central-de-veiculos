@@ -1,5 +1,10 @@
 package br.com.concessionaria_unifacs.modelos;
 
+/**
+ * Esta classe define todos os atributos
+ * e métodos inerentes aos veículos da
+ * concessionária
+ */
 public class Automovel {
 	private String marca;
 	private String modelo;

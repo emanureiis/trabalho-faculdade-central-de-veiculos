@@ -4,14 +4,31 @@ import java.util.Scanner;
 
 import br.com.concessionaria_unifacs.modelos.Database;
 
+/**
+ * Classe responsável por executar o
+ * nosso programa 
+ */
 public class Principal {
 	public static void main(String[] args) {
+		/**
+		 * É instanciada uma referência para
+		 * um objeto do tipo DataBase afim de
+		 * simular o banco de dados
+		 */
 		Database dataBase = new Database();
+		
+		/**
+		 * Invocação do menu para que o
+		 * progrma seja iniciado
+		 */
 		menu();
 	}
 
 	public static void menu() {		
 		Scanner leitor = new Scanner(System.in);
+		/**
+		 * validador
+		 */
 		Boolean validador = true;
 		while (validador == true)  {	
 			System.out.println("\n+----------------------+");
@@ -26,6 +43,10 @@ public class Principal {
 			System.out.println("+----------------------+");
 			System.out.println("Digite uma opção:");
 			String resposta = leitor.next(); 
+
+			/**
+			 * Switch
+			 */
 			switch (resposta) {
 				case "1": {
 					Database.cadastrar();

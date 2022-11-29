@@ -3,13 +3,31 @@ package br.com.concessionaria_unifacs.modelos;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 import br.com.concessionaria_unifacs.programa.Principal;
 
+/**
+ * A classe Database simula um pequeno
+ * banco de dados que armazena os veículos
+ * da concessionária.
+ */
 public class Database {
 	private static Scanner leitor = new Scanner(System.in);
-	private static Collection<Automovel> automoveis = new HashSet<>();
+	/**
+	 * A Collection automoveis é responsável
+	 * por armazenar todos os veículos da
+	 * concessionária
+	 */
+	private static Set<Automovel> automoveis = new HashSet<>();
 	
+	/**
+	 * No construtor da classe Database foi
+	 * definido que ao instanciarmos algum objeto
+	 * desse tipo, serão instanciados também
+	 * 07 objetos do tipo Automovel, além de adicionar
+	 * esses obejetos em nossa Collection automoveis
+	 */
 	public Database() {
 		Automovel automovel1 = new Automovel("Chevrolet", "Corsa", "2002", "Branco", "1.0", "ABC1234", "16.000");
 		automoveis.add(automovel1);
@@ -28,17 +46,38 @@ public class Database {
 	}
 	
 	public static void cadastrar() {	
-		int stageTotal = 7;
+		/**
+		 * Define a quantidade inicial de etapas
+		 * do processo de cadastro de veículos;
+		 * Fizemos isso para que o incremento
+		 * funcione corretamente
+		 * 
+		 */
 		int stage = 1;
+		
+		/**
+		 * Define a quantidade total de etapas
+		 * do processo de cadastro de veículos
+		 */
+		int stageTotal = 7;
 		System.out.println("\n+-----------------------------------------+");
 		System.out.println("|           CADASTRAR VEÍCULO             |");
 		System.out.println("|      (DIGITE 'C' PARA CANCELAR)         |");
 		System.out.println("+-----------------------------------------+");
 		
+		/**
+		 * Primeira etapa do cadastro 
+		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a placa do veículo:");
 		String placa = leitor.next();
 		verificarCancelar(placa);
 			for (Automovel automovel : automoveis) {
+				/**
+				 * Caso exista algum automóvel com a mesma
+				 * placa digitada pelo usuário, a menssagem
+				 * de erro abaixo será impressa e o método
+				 * cadastrar() será invocado novamente
+				 */
 				if (automovel.getPlaca() == placa) {
 					System.out.println("\n+----------------------+");
 					System.out.println("|       E R R O       |");
@@ -47,30 +86,53 @@ public class Database {
 					cadastrar();
 				}
 			}
-		
+	
+		/**
+		 * Segunda etapa do cadastro 
+		 */
 		System.out.println("Etapa "+(stage++)+" de "+stageTotal+ " - Digite a marca do veículo:");
 		String marca = leitor.next();
 		verificarCancelar(marca);
-		
+
+		/**
+		 * Terceira etapa do cadastro 
+		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite o modelo do veículo:");
 		String modelo = leitor.next();
 		verificarCancelar(modelo);
 		
+		/**
+		 * Quarta etapa do cadastro 
+		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite o ano do veículo:");
 		String ano = leitor.next();
 		verificarCancelar(ano);
 		
+		/**
+		 * Quinta etapa do cadastro 
+		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a cor do veículo:");
 		String cor = leitor.next();
 		verificarCancelar(cor);
 		
+		/**
+		 * Sexta etapa do cadastro 
+		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a motorização do veículo:");
 		String motorizacao = leitor.next();
 		verificarCancelar(motorizacao);
 		
+		/**
+		 * Sétima etapa do cadastro 
+		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite o preço do veículo:");
 		String preco = leitor.next();
 		
+		/**
+		 * Um objeto do tipo Automovel é instanciado com 
+		 * todos os atributos que o usuário digitou e adicionado
+		 * à Collection automoveis 
+		 */
 		automoveis.add(new Automovel(marca, modelo, ano, cor, motorizacao, placa, preco));
 
 		System.out.println("+------------------------------------------+");
