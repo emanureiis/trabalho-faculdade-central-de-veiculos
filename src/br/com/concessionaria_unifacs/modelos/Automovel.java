@@ -10,7 +10,6 @@ public class Automovel {
 	private String preco;
 	
 	public Automovel(String marca, String modelo, String ano, String cor, String motorizacao, String placa, String preco) {
-		System.out.println("Criando");
 		this.marca = marca;
 		this.modelo = modelo;
 		this.ano = ano;
@@ -79,7 +78,7 @@ public class Automovel {
 	@Override
 	public String toString() {
 		return this.marca+" "+this.modelo+" "+this.motorizacao+" - "+this.ano+ ""
-				+ "\nCor: "+this.cor+ ", Placa: "+this.placa+ ", Preço: R$ "+this.preco; 
+				+ " Cor: "+this.cor+ ", Placa: "+this.placa+ ", Preço: R$ "+this.preco; 
 	}
 	
 }
