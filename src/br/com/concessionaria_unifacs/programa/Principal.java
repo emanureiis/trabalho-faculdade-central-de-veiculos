@@ -1,5 +1,7 @@
 package br.com.concessionaria_unifacs.programa;
 
+import java.io.IOException;
+import java.lang.ref.Cleaner;
 import java.util.Scanner;
 
 import br.com.concessionaria_unifacs.modelos.Database;
@@ -8,10 +10,9 @@ public class Principal {
 	public static void main(String[] args) {
 		Database dataBase = new Database();
 		menu();
-		
 	}
 
-	public static void menu() {
+	public static void menu() {		
 		Scanner leitor = new Scanner(System.in);
 		Boolean validador = true;
 		while (validador == true)  {	
@@ -48,12 +49,13 @@ public class Principal {
 					break;
 				}
 				case "5": {
-					System.out.println("Saiu");
+					System.out.println("\n~ FIM DO PROGRAMA ~");
 					validador = false;
 					break;
 				}
 				default : {
-					System.out.println("Erro");
+					System.out.println("\n----- OPÇÃO INVÁLIDA ---------");
+					System.out.println("Por favor escolha entre 1 e 5:");
 					validador = true;
 					break;
 				}
