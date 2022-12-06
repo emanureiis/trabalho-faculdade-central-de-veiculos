@@ -1,9 +1,9 @@
 package br.com.concessionaria_unifacs.modelos;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Scanner;
-import java.util.Set;
 
 import br.com.concessionaria_unifacs.programa.Principal;
 
@@ -12,14 +12,14 @@ import br.com.concessionaria_unifacs.programa.Principal;
  * banco de dados que armazena os veículos
  * da concessionária.
  */
-public class Database {
+public class DataBase {
 	private static Scanner leitor = new Scanner(System.in);
 	/**
 	 * A Collection automoveis é responsável
 	 * por armazenar todos os veículos da
 	 * concessionária
 	 */
-	private static Set<Automovel> automoveis = new HashSet<>();
+	private static List<Automovel> automoveis = new ArrayList<>();
 	
 	/**
 	 * No construtor da classe Database foi
@@ -28,7 +28,7 @@ public class Database {
 	 * 07 objetos do tipo Automovel, além de adicionar
 	 * esses obejetos em nossa Collection automoveis
 	 */
-	public Database() {
+	public DataBase() {
 		Automovel automovel1 = new Automovel("Chevrolet", "Corsa", "2002", "Branco", "1.0", "ABC1234", "16.000");
 		automoveis.add(automovel1);
 		Automovel automovel2 = new Automovel("Volkswagen", "Gol", "2020", "Preto", "1.6", "DEF5678", "45.000");
@@ -69,7 +69,7 @@ public class Database {
 		 * Primeira etapa do cadastro 
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a placa do veículo:");
-		String placa = leitor.next();
+		String placa = leitor.nextLine();
 		verificarCancelar(placa);
 			for (Automovel automovel : automoveis) {
 				/**
@@ -91,42 +91,42 @@ public class Database {
 		 * Segunda etapa do cadastro 
 		 */
 		System.out.println("Etapa "+(stage++)+" de "+stageTotal+ " - Digite a marca do veículo:");
-		String marca = leitor.next();
+		String marca = leitor.nextLine();
 		verificarCancelar(marca);
 
 		/**
 		 * Terceira etapa do cadastro 
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite o modelo do veículo:");
-		String modelo = leitor.next();
+		String modelo = leitor.nextLine();
 		verificarCancelar(modelo);
 		
 		/**
 		 * Quarta etapa do cadastro 
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite o ano do veículo:");
-		String ano = leitor.next();
+		String ano = leitor.nextLine();
 		verificarCancelar(ano);
 		
 		/**
 		 * Quinta etapa do cadastro 
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a cor do veículo:");
-		String cor = leitor.next();
+		String cor = leitor.nextLine();
 		verificarCancelar(cor);
 		
 		/**
 		 * Sexta etapa do cadastro 
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a motorização do veículo:");
-		String motorizacao = leitor.next();
+		String motorizacao = leitor.nextLine();
 		verificarCancelar(motorizacao);
 		
 		/**
 		 * Sétima etapa do cadastro 
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite o preço do veículo:");
-		String preco = leitor.next();
+		String preco = leitor.nextLine();
 		
 		/**
 		 * Um objeto do tipo Automovel é instanciado com 
@@ -142,7 +142,17 @@ public class Database {
 		Principal.menu();
 	}
 	
-	public static void listar() {
+	/**
+	 *  Este método é responsável pela listagem 
+	 *  dos veículos registrados no sistema
+	 */
+	public static void listar() {	
+		automoveis.sort(Comparator.comparing(Automovel::getModelo));
+		/**
+		 * Se a Collection automoveis tiver ao menos um objeto,
+		 * para cada automóvel é exibido os atributos
+		 * modelo, ano e preço
+		 */
 		if (automoveis.size() > 0) {
 			int count = 0;
 			System.out.println("\n+------------------------------------------+");
@@ -150,8 +160,7 @@ public class Database {
 			System.out.println("+------------------------------------------+");
 			System.out.printf("| %-10s | %-10s | %-10s     | \n", "MODELO", "PLACA", "PREÇO");
 			System.out.println("+------------------------------------------+");
-			
-	        for (Automovel automovel : automoveis) {
+			for (Automovel automovel : automoveis) {
 				System.out.format("| %-10s | %-10s | R$ %-10s  | \n", automovel.getModelo(), automovel.getPlaca(), automovel.getPreco());
 	        }
 	        System.out.println("+------------------------------------------+");			
@@ -159,7 +168,11 @@ public class Database {
 		}
 
 	}
-		
+	
+	/**
+	 *  Este método edita os atributos de um veiculo especifico
+	 *  baseado na placa que o usuário digítar 
+	 */
 	public static void editar() {
 		System.out.println("\n+--------------------------------------------+");
 		System.out.println("|               EDITAR VEÍCULO               |");
@@ -170,6 +183,10 @@ public class Database {
 		verificarCancelar(resposta);
 		
 		for (Automovel automovel : automoveis) {	
+			/**
+			 * se a placa que o usuario digitou for igual 
+			 * a de algum veiculo da Collection, este é seleciomado 
+			 */
 			if (automovel.getPlaca().equals(resposta)) {
 				boolean validador = true;
 				while (validador == true) {
@@ -187,7 +204,11 @@ public class Database {
 					System.out.println("| 8. Cancelar                             |");
 					System.out.println("+-----------------------------------------+");
 					String opcao = leitor.next();
-
+					
+					/**
+					 * verifica a opcao que o usuario digitou e baseado nisso
+					 * realiza um comando especifico 
+					 */
 					switch (opcao) {
 						case "1": {
 							System.out.println("\n- Digite a nova marca do veículo:");
@@ -263,6 +284,12 @@ public class Database {
 				Principal.menu();
 			}
 		}
+		
+		/**
+		 * se a placa que o usuario digitou não for
+		 * encontrada na Collection automoveis, uma mensagem
+		 * de erro é impressa 
+		 */
 		for (Automovel automovel : automoveis) {	
 			if ((!automovel.getPlaca().equals(resposta))){
 				System.out.println("\n+---------------------+");
@@ -317,13 +344,38 @@ public class Database {
 		
 		for (Automovel automovel : automoveis) {	
 			if (automovel.getPlaca().equals(placa)) {
-				automoveis.remove(automovel);
+				
+				Boolean validador = true;
+				while (validador == true) {
+					System.out.println("\n"+automovel.getMarca()+" "+automovel.getModelo()+" "+automovel.getMotorizacao()+" - "+automovel.getAno()+" SELECIONADO");
+					System.out.println("Deseja realmente excluir? (S/N)");
+					String resposta = leitor.next();
+	
+					switch (resposta.toUpperCase()) {
+						case "S": {
+							automoveis.remove(automovel);
+							validador = false;
+							break;
+						}
+						case "N": {
+							Principal.menu();
+							break;
+						}
+						default : {
+							System.out.println("\n----- OPÇÃO INVÁLIDA -----");
+							System.out.println("Por favor escolha S ou N:");
+							validador = true;
+							break;
+						}
+					}
+			}
 				System.out.println("\n+------------------------------------------+");
 				System.out.println("|  PARABÉNS! VEÍCULO EXCLUIDO COM SUCESSO  |");
 				System.out.println("+------------------------------------------+");
 				Principal.menu();
 			}
 		}
+			
 		for (Automovel automovel : automoveis) {
 			if (!automovel.getPlaca().equals(placa)) {
 				System.out.println("\n+---------------------+");
@@ -334,7 +386,7 @@ public class Database {
 			}
 		}
 	}
-
+	
 	private static void verificarCancelar(String resposta) {
 		switch (resposta.toUpperCase()) {
 			case "C": {
@@ -344,5 +396,4 @@ public class Database {
 			}
 		}
 	}
-
 }

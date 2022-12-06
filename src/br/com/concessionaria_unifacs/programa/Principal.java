@@ -2,7 +2,7 @@ package br.com.concessionaria_unifacs.programa;
 
 import java.util.Scanner;
 
-import br.com.concessionaria_unifacs.modelos.Database;
+import br.com.concessionaria_unifacs.modelos.DataBase;
 
 /**
  * Classe responsável por executar o
@@ -15,7 +15,7 @@ public class Principal {
 		 * um objeto do tipo DataBase afim de
 		 * simular o banco de dados
 		 */
-		Database dataBase = new Database();
+		DataBase dataBase = new DataBase();
 		
 		/**
 		 * Invocação do menu para que o
@@ -44,32 +44,29 @@ public class Principal {
 			System.out.println("Digite uma opção:");
 			String resposta = leitor.next(); 
 
-			/**
-			 * Switch
-			 */
 			switch (resposta) {
 				case "1": {
-					Database.cadastrar();
+					DataBase.cadastrar();
 					validador = true;
 					break;
 				}
 				case "2": {
-					Database.listar();
+					DataBase.listar();
 					validador = true;
 					break;
 				}
 				case "3": {
-					Database.procurar();
+					DataBase.procurar();
 					validador = true;
 					break;
 				}
 				case "4": {
-					Database.editar();
+					DataBase.editar();
 					validador = true;
 					break;
 				}
 				case "5": {
-					Database.excluir();
+					DataBase.excluir();
 					validador = true;
 					break;
 				}
