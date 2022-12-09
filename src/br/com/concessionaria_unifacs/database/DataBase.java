@@ -1,10 +1,11 @@
-package br.com.concessionaria_unifacs.modelos;
+package br.com.concessionaria_unifacs.database;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+import br.com.concessionaria_unifacs.modelos.Automovel;
 import br.com.concessionaria_unifacs.programa.Principal;
 
 /**
@@ -70,7 +71,7 @@ public class DataBase {
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a placa do veículo:");
 		String placa = leitor.nextLine();
-		verificarCancelar(placa);
+		Verifica.verificarCancelar(placa);
 			for (Automovel automovel : automoveis) {
 				/**
 				 * Caso exista algum automóvel com a mesma
@@ -92,35 +93,35 @@ public class DataBase {
 		 */
 		System.out.println("Etapa "+(stage++)+" de "+stageTotal+ " - Digite a marca do veículo:");
 		String marca = leitor.nextLine();
-		verificarCancelar(marca);
+		Verifica.verificarCancelar(marca);
 
 		/**
 		 * Terceira etapa do cadastro 
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite o modelo do veículo:");
 		String modelo = leitor.nextLine();
-		verificarCancelar(modelo);
+		Verifica.verificarCancelar(modelo);
 		
 		/**
 		 * Quarta etapa do cadastro 
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite o ano do veículo:");
 		String ano = leitor.nextLine();
-		verificarCancelar(ano);
+		Verifica.verificarCancelar(ano);
 		
 		/**
 		 * Quinta etapa do cadastro 
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a cor do veículo:");
 		String cor = leitor.nextLine();
-		verificarCancelar(cor);
+		Verifica.verificarCancelar(cor);
 		
 		/**
 		 * Sexta etapa do cadastro 
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a motorização do veículo:");
 		String motorizacao = leitor.nextLine();
-		verificarCancelar(motorizacao);
+		Verifica.verificarCancelar(motorizacao);
 		
 		/**
 		 * Sétima etapa do cadastro 
@@ -180,7 +181,7 @@ public class DataBase {
 		System.out.println("+--------------------------------------------+");
 		System.out.println("Insira a placa do autómovel que deseja editar:");
 		String resposta = leitor.next();
-		verificarCancelar(resposta);
+		Verifica.verificarCancelar(resposta);
 		
 		for (Automovel automovel : automoveis) {	
 			/**
@@ -308,7 +309,7 @@ public class DataBase {
 		System.out.println("+---------------------------------------------+");
 		System.out.println("Insira a placa do automóvel que deseja procurar:");
 		String resposta = leitor.next();
-		verificarCancelar(resposta);
+		Verifica.verificarCancelar(resposta);
 		
 		for (Automovel automovel : automoveis) {	
 			if (automovel.getPlaca().equals(resposta)) {
@@ -340,7 +341,7 @@ public class DataBase {
 		System.out.println("+---------------------------------------------+");
 		System.out.println("Insira a placa do autómovel que deseja excluir:");
 		String placa = leitor.next();
-		verificarCancelar(placa);
+		Verifica.verificarCancelar(placa);
 		
 		for (Automovel automovel : automoveis) {	
 			if (automovel.getPlaca().equals(placa)) {
@@ -383,16 +384,6 @@ public class DataBase {
 				System.out.println("+---------------------+");
 				System.out.println("Veículo não encontrado.");
 				excluir();
-			}
-		}
-	}
-	
-	private static void verificarCancelar(String resposta) {
-		switch (resposta.toUpperCase()) {
-			case "C": {
-				System.out.println("\n~ Operação cancelada com sucesso! ~");
-				Principal.menu();
-				break;
 			}
 		}
 	}

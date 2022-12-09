@@ -2,7 +2,7 @@ package br.com.concessionaria_unifacs.programa;
 
 import java.util.Scanner;
 
-import br.com.concessionaria_unifacs.modelos.DataBase;
+import br.com.concessionaria_unifacs.database.DataBase;
 
 /**
  * Classe responsável por executar o
