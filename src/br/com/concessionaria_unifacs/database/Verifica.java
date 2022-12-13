@@ -16,6 +16,7 @@ public class Verifica {
 	}
 	
 	public static boolean verificarPlaca(String placa) {
+		
 		for (Automovel automovel : DataBase.getAutomoveisList()) {
 			if (automovel.getPlaca().equals(placa)) {
 				System.out.println("\n+----------------------+");
