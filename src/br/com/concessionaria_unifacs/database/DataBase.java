@@ -2,6 +2,7 @@ package br.com.concessionaria_unifacs.database;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,12 +16,9 @@ import br.com.concessionaria_unifacs.programa.Principal;
  */
 public class DataBase {
 	private static Scanner leitor = new Scanner(System.in);
-	/**
-	 * A Collection automoveis é responsável
-	 * por armazenar todos os veículos da
-	 * concessionária
-	 */
-	private static List<Automovel> automoveis = new ArrayList<>();
+	private static List<Automovel> automoveisList = new ArrayList<Automovel>();
+//	private static List<Automovel> automoveisLinkedList = new LinkedList<Automovel>();
+	
 	
 	/**
 	 * No construtor da classe Database foi
@@ -31,21 +29,29 @@ public class DataBase {
 	 */
 	public DataBase() {
 		Automovel automovel1 = new Automovel("Chevrolet", "Corsa", "2002", "Branco", "1.0", "ABC1234", "16.000");
-		automoveis.add(automovel1);
+		automoveisList.add(automovel1);
 		Automovel automovel2 = new Automovel("Volkswagen", "Gol", "2020", "Preto", "1.6", "DEF5678", "45.000");
-		automoveis.add(automovel2);
+		automoveisList.add(automovel2);
 		Automovel automovel3 = new Automovel("Pegeout", "308", "2018", "Branco", "2.0", "RDE4F68", "50.000");
-		automoveis.add(automovel3);
+		automoveisList.add(automovel3);
 		Automovel automovel4 = new Automovel("Chevrolet", "Onix", "2018", "Branco", "1.8 Flex", "TRX4778", "44.900");
-		automoveis.add(automovel4);
+		automoveisList.add(automovel4);
 		Automovel automovel5 = new Automovel("Hyundai", "Creta", "2022", "Prata", "2.0", "ACE098A", "109.000");
-		automoveis.add(automovel5);
+		automoveisList.add(automovel5);
 		Automovel automovel6 = new Automovel("Ford", "Ka", "2019", "Azul", "1.8 Flex", "NWV6I72", "56.000");
-		automoveis.add(automovel6);
+		automoveisList.add(automovel6);
 		Automovel automovel7 = new Automovel("Fiat", "Uno", "2013", "Rosa", "1.0 Flex", "BRN8542", "26.000");
-		automoveis.add(automovel7);
+		automoveisList.add(automovel7);
 	}
 	
+	public static List<Automovel> getAutomoveisList() {
+		return automoveisList;
+	}
+
+	public static void setAutomoveisList(List<Automovel> automoveisList) {
+		DataBase.automoveisList = automoveisList;
+	}
+
 	public static void cadastrar() {	
 		/**
 		 * Define a quantidade inicial de etapas
@@ -71,27 +77,17 @@ public class DataBase {
 		 */
 		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a placa do veículo:");
 		String placa = leitor.nextLine();
-		Verifica.verificarCancelar(placa);
-			for (Automovel automovel : automoveis) {
-				/**
-				 * Caso exista algum automóvel com a mesma
-				 * placa digitada pelo usuário, a menssagem
-				 * de erro abaixo será impressa e o método
-				 * cadastrar() será invocado novamente
-				 */
-				if (automovel.getPlaca() == placa) {
-					System.out.println("\n+----------------------+");
-					System.out.println("|       E R R O       |");
-					System.out.println("+----------------------+");
-					System.out.println("Este veículo já existe.\nCadastre um novo ou exclua o existente.");
-					cadastrar();
-				}
+		Verifica.verificarPlaca(placa);
+//		Verifica.verificarCancelar(placa);
+			if (Verifica.verificarPlaca(placa)) {
+				Principal.menu();
 			}
+
 	
 		/**
 		 * Segunda etapa do cadastro 
 		 */
-		System.out.println("Etapa "+(stage++)+" de "+stageTotal+ " - Digite a marca do veículo:");
+		System.out.println("\nEtapa "+(stage++)+" de "+stageTotal+ " - Digite a marca do veículo:");
 		String marca = leitor.nextLine();
 		Verifica.verificarCancelar(marca);
 
@@ -134,9 +130,9 @@ public class DataBase {
 		 * todos os atributos que o usuário digitou e adicionado
 		 * à Collection automoveis 
 		 */
-		automoveis.add(new Automovel(marca, modelo, ano, cor, motorizacao, placa, preco));
+		automoveisList.add(new Automovel(marca, modelo, ano, cor, motorizacao, placa, preco));
 
-		System.out.println("+------------------------------------------+");
+		System.out.println("\n+------------------------------------------+");
 		System.out.println("| PARABÉNS! CADASTRO REALIZADO COM SUCESSO |");
 		System.out.println("+------------------------------------------+");
 		
@@ -148,20 +144,20 @@ public class DataBase {
 	 *  dos veículos registrados no sistema
 	 */
 	public static void listar() {	
-		automoveis.sort(Comparator.comparing(Automovel::getModelo));
+		automoveisList.sort(Comparator.comparing(Automovel::getModelo));
 		/**
 		 * Se a Collection automoveis tiver ao menos um objeto,
 		 * para cada automóvel é exibido os atributos
 		 * modelo, ano e preço
 		 */
-		if (automoveis.size() > 0) {
+		if (automoveisList.size() > 0) {
 			int count = 0;
 			System.out.println("\n+------------------------------------------+");
 			System.out.println("|           RELAÇÃO DE VEÍCULOS            |");
 			System.out.println("+------------------------------------------+");
 			System.out.printf("| %-10s | %-10s | %-10s     | \n", "MODELO", "PLACA", "PREÇO");
 			System.out.println("+------------------------------------------+");
-			for (Automovel automovel : automoveis) {
+			for (Automovel automovel : automoveisList) {
 				System.out.format("| %-10s | %-10s | R$ %-10s  | \n", automovel.getModelo(), automovel.getPlaca(), automovel.getPreco());
 	        }
 	        System.out.println("+------------------------------------------+");			
@@ -183,7 +179,7 @@ public class DataBase {
 		String resposta = leitor.next();
 		Verifica.verificarCancelar(resposta);
 		
-		for (Automovel automovel : automoveis) {	
+		for (Automovel automovel : automoveisList) {	
 			/**
 			 * se a placa que o usuario digitou for igual 
 			 * a de algum veiculo da Collection, este é seleciomado 
@@ -254,6 +250,7 @@ public class DataBase {
 						case "6": {
 							System.out.println("\n- Digite a nova placa do veículo:");
 							String placa = leitor.next();
+							Verifica.verificarPlaca(placa);
 							automovel.setPlaca(placa);
 							validador = false;
 							break;
@@ -291,7 +288,7 @@ public class DataBase {
 		 * encontrada na Collection automoveis, uma mensagem
 		 * de erro é impressa 
 		 */
-		for (Automovel automovel : automoveis) {	
+		for (Automovel automovel : automoveisList) {	
 			if ((!automovel.getPlaca().equals(resposta))){
 				System.out.println("\n+---------------------+");
 				System.out.println("|       E R R O       |");
@@ -311,7 +308,7 @@ public class DataBase {
 		String resposta = leitor.next();
 		Verifica.verificarCancelar(resposta);
 		
-		for (Automovel automovel : automoveis) {	
+		for (Automovel automovel : automoveisList) {	
 			if (automovel.getPlaca().equals(resposta)) {
 				System.out.println("\n+-----------------------------------------------------------------+");
 				System.out.println("|                      VEÍCULO ENCONTRADO                         |");
@@ -323,7 +320,7 @@ public class DataBase {
 					Principal.menu();
 			}
 		}
-		for (Automovel automovel : automoveis) {	
+		for (Automovel automovel : automoveisList) {	
 			if ((!automovel.getPlaca().equals(resposta))){
 				System.out.println("\n+---------------------+");
 				System.out.println("|       E R R O       |");
@@ -343,7 +340,7 @@ public class DataBase {
 		String placa = leitor.next();
 		Verifica.verificarCancelar(placa);
 		
-		for (Automovel automovel : automoveis) {	
+		for (Automovel automovel : automoveisList) {	
 			if (automovel.getPlaca().equals(placa)) {
 				
 				Boolean validador = true;
@@ -354,7 +351,7 @@ public class DataBase {
 	
 					switch (resposta.toUpperCase()) {
 						case "S": {
-							automoveis.remove(automovel);
+							automoveisList.remove(automovel);
 							validador = false;
 							break;
 						}
@@ -377,7 +374,7 @@ public class DataBase {
 			}
 		}
 			
-		for (Automovel automovel : automoveis) {
+		for (Automovel automovel : automoveisList) {
 			if (!automovel.getPlaca().equals(placa)) {
 				System.out.println("\n+---------------------+");
 				System.out.println("|       E R R O       |");
